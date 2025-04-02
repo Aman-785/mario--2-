@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 		switch (event.type)
 		{
 		case SDL_QUIT:
-
+			SDL_Log("touche quit");
 			continuer = 0;
 			break;
 
@@ -58,19 +58,19 @@ int main(int argc, char *argv[])
 
 			{
 			case SDLK_1:
-
+				SDL_Log("touche 1");
 				jouer(renderer);
 				
 				break;
 
 			case SDLK_2: // image crédit
 
+				SDL_Log("touche 2");
 				image2(renderer);
 
 				break;
 			}
 		}
-		jouer(renderer);
 	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

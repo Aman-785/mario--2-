@@ -10,22 +10,12 @@ int jouer(SDL_Renderer *renderer)
 
     int continuer = 1; // a utiliser pour savoir si on continue la boucle du jeu ou si on arrête.
     SDL_Event events;
-
+    SDL_SetRenderDrawColor(renderer, 255,255,255,255);
     while (continuer)
     { // coeur du jeu ici, les actions seront repété pour faire le déplacement des différentes images, ...
-        int i = 0;
-        switch (i)
-        {
-        case 1:
+        SDL_RenderClear(renderer);
 
-            
-
-            break;
-
-        case 2:
-
-            break;
-        }
+        SDL_RenderPresent(renderer);
     }
 
     // a vous de compléter, au fur et à mesure, les deux fonctions en dessous pour bien faire le nettoyage.
