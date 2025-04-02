@@ -19,7 +19,7 @@ void image1(SDL_Renderer *renderer) // Image du main
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
-
+   //*
 void image2(SDL_Renderer *renderer) // Image crédit
 {
 	SDL_Rect rect2 = {0, 0, 600, 600};
