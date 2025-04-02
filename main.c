@@ -9,7 +9,7 @@
 
 int init(SDL_Window **window, SDL_Renderer **renderer, int w, int h);
 
-void image1(SDL_Renderer *renderer) // Image du main
+void image1(SDL_Renderer *renderer) 
 {
 	SDL_Rect rect2 = {0, 0, 600, 600};
 	SDL_Rect rect1 = {0, 0, 600, 600};
@@ -19,14 +19,14 @@ void image1(SDL_Renderer *renderer) // Image du main
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
-
-void image2(SDL_Renderer *renderer) // Image crédit
+   
+void image2(SDL_Renderer *renderer)
 {
 	SDL_Rect rect2 = {0, 0, 600, 600};
 	SDL_Rect rect1 = {0, 0, 600, 600};
 
 	SDL_RenderClear(renderer);
-	SDL_Texture *texture = loadImage("mario1/credit.jpeg", renderer);
+	SDL_Texture *texture = loadImage("img/credit.jpg", renderer);
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	SDL_Event event;
 	int continuer = 1;
 
-	while (SDL_PollEvent(&event) || continuer == 1) // Boucle infini
+	while (SDL_PollEvent(&event) || continuer == 1) 
 	{
 
 		switch (event.type)
@@ -58,12 +58,15 @@ int main(int argc, char *argv[])
 			{
 			case SDLK_1:
 				SDL_Log("touche 1");
+				continuer = jouer(renderer);
 				
 				break;
 
-				case SDLK_3:
+			case SDLK_2: 
+
 				SDL_Log("touche 2");
-				jouer(renderer);
+				image2(renderer);
+
 				break;
 			}
 		}
