@@ -26,7 +26,7 @@ void image2(SDL_Renderer *renderer) // Image crédit
 	SDL_Rect rect1 = {0, 0, 600, 600};
 
 	SDL_RenderClear(renderer);
-	SDL_Texture *texture = loadImage("Sans titre.jpeg", renderer);
+	SDL_Texture *texture = loadImage("img/credit.jpg", renderer);
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
