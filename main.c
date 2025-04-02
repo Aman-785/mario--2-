@@ -19,14 +19,14 @@ void image1(SDL_Renderer *renderer) // Image du main
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
-   //*
+
 void image2(SDL_Renderer *renderer) // Image crédit
 {
 	SDL_Rect rect2 = {0, 0, 600, 600};
 	SDL_Rect rect1 = {0, 0, 600, 600};
 
 	SDL_RenderClear(renderer);
-	SDL_Texture *texture = loadImage("img/credit.jpg", renderer);
+	SDL_Texture *texture = loadImage("mario1/credit.jpeg", renderer);
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
@@ -58,15 +58,12 @@ int main(int argc, char *argv[])
 			{
 			case SDLK_1:
 				SDL_Log("touche 1");
-				jouer(renderer);
 				
 				break;
 
-			case SDLK_2: // image crédit
-
+				case SDLK_3:
 				SDL_Log("touche 2");
-				image2(renderer);
-
+				jouer(renderer);
 				break;
 			}
 		}
