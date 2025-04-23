@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
 
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	image1(renderer);
-
 	SDL_Event event;
 	int continuer = 1;
 
