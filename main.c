@@ -32,7 +32,7 @@ void image2(SDL_Renderer *renderer) // Image crédit
 }
 
 int main(int argc, char *argv[])
-{
+{    
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_Window *window = SDL_CreateWindow("Mario", 700, 500, 600, 600, SDL_WINDOW_SHOWN);
 

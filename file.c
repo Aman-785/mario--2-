@@ -38,45 +38,52 @@ SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer)
 
 void LibererMap(Map *map, Sprites *sprites)
 {
-}
-void *allouer(int taille)
-{ // allocation mémoire
-
-    taille = 10;
-    int *allouer = (int *)malloc(taille * sizeof(int));
-
-    if (allouer == NULL)
-    {
-        perror("erreur allocation");
-        free(allouer);
-    }
-
-}
-
-
-
-void lire(){ // ouvrire le fichier niveau0.lvl
-    struct Map t;
-    int width, height , a;
-    char niv0[5];
-    FILE *file = fopen("niveau0.lvl", "r");
+    int width, height;
+    char niv0[20];
+    FILE *file = fopen("niveau0.lvl", "r"); 
     if (file == NULL)
     {
         perror("erreur fichier");
+        exit(1);
     }
 
-    fgets(niv0, 5, file);
-    printf("%s", niv0);
+    fgets(niv0, sizeof(niv0), file);
 
-    fscanf(file, "%d %d ", &width, &height);
-    printf("%d %d", width, height);
+    fscanf(file, "%d %d", &width, &height);
+    printf("%d %d",width,height);
 
-    while(fscanf(file, "%d" , &a)){
-     
-         
-        
+    int **LoadedMap = malloc(width * sizeof(int));
+    if (LoadedMap == NULL)
+    {
+        perror("erreur memoire");
+        fclose(file);
+        exit(1);
     }
 
+    for (int i = 0; i < width; i++)
+    {
+        LoadedMap[i] = malloc(height * sizeof(int));
+        if (LoadedMap[i] == NULL)
+        {
+            perror("erreur memoire 2");
 
-    fclose(file);
+            for (int j = 0; j < i; j++)
+            {
+                free(LoadedMap[j]);
+            }
+            free(LoadedMap);
+            fclose(file);
+            exit(1);
+        }
+    }
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            fscanf(file, "%d", &LoadedMap[i][j]);
+            printf("%d",LoadedMap[i][j]);
+        }
+    }
 }
+
+
