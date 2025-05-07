@@ -28,13 +28,13 @@ int jouer(SDL_Renderer *renderer)
     { // coeur du jeu ici, les actions seront repété pour faire le déplacement des différentes images, ...
         SDL_RenderClear(renderer);
     
-        while (SDL_PollEvent(&event)) {
-            switch (event.type) {
+        while (SDL_PollEvent(&events)) {
+            switch (events.type) {
                 case SDL_QUIT:
                     continuer = 0;
                     break;
                 default:
-                    gererDirection(&event, mario);
+                    gererDirection(&events, mario);
                     break;
             }
         }
@@ -48,7 +48,7 @@ int jouer(SDL_Renderer *renderer)
     }
 
     // a vous de compléter, au fur et à mesure, les deux fonctions en dessous pour bien faire le nettoyage.
-    LibererMap(map, sprites);
+    LibererMap(&map, sprites);
     freePersonnage(mario, NULL, 0);
 
     return continuer;
