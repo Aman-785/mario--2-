@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 				
 				break;
 
-			case SDLK_3: // image crédit
+			case SDLK_2: // image crédit
 
 				SDL_Log("touche 2");
 				image2(renderer);
