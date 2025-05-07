@@ -52,4 +52,4 @@ int jouer(SDL_Renderer *renderer)
     freePersonnage(mario, NULL, 0);
 
     return continuer;
-}
+}//5
