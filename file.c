@@ -38,9 +38,71 @@ SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer)
 
 void LibererMap(Map *map, Sprites *sprites)
 {
+  
+
+for (int i = 0; i < NbSprites; i++) {
+    if (sprites[i].sprite != NULL) {
+        SDL_DestroyTexture(sprites[i].sprite);
+        sprites[i].sprite = NULL; 
+    }
+}
+
+
+if (map->LoadedMap != NULL) {
+    for (int i = 0; i < map->height; i++) {
+        if (map->LoadedMap[i] != NULL) {
+            free(map->LoadedMap[i]);
+        }
+    }
+    free(map->LoadedMap);
+    map->LoadedMap = NULL;
+}
+    
+
+
+}
+
+void texture(Sprites *sprites, SDL_Renderer *renderer)
+{
+
+    SDL_Texture *texture[11];
+
+    texture[0] = loadImage("img/sky.png", renderer);
+    texture[1] = loadImage("img/solpng", renderer);
+    texture[2] = loadImage("img/block.png", renderer);
+    texture[3] = loadImage("img/boite.png", renderer);
+    texture[4] = loadImage("img/tuyau1.png", renderer);
+    texture[5] = loadImage("img/tuyau2.png", renderer);
+    texture[6] = loadImage("img/tuyau3.png", renderer);
+    texture[7] = loadImage("img/tuyau4.png", renderer);
+    texture[8] = loadImage("img/fin1.png", renderer);
+    texture[9] = loadImage("img/fin2.png", renderer);
+    texture[10] = loadImage("img/goomba1.png", renderer);
+
+    for (int i = 0; i < 11; i++)
+    {
+        sprites[i].sprite = texture[i];
+    }
+
+    sprites[0].traverser = 0;
+    sprites[1].traverser = 1;
+    sprites[2].traverser = 1;
+    sprites[3].traverser = 1;
+    sprites[4].traverser = 1;
+    sprites[5].traverser = 1;
+    sprites[6].traverser = 1;
+    sprites[7].traverser = 1;
+    sprites[8].traverser = 0;
+    sprites[9].traverser = 0;
+    sprites[10].traverser = 1;
+}
+
+void lire(Map *map)
+{
+
     int width, height;
     char niv0[20];
-    FILE *file = fopen("niveau0.lvl", "r"); 
+    FILE *file = fopen("niveau0.lvl", "r");
     if (file == NULL)
     {
         perror("erreur fichier");
@@ -50,7 +112,7 @@ void LibererMap(Map *map, Sprites *sprites)
     fgets(niv0, sizeof(niv0), file);
 
     fscanf(file, "%d %d", &width, &height);
-    printf("%d %d",width,height);
+    SDL_Log("%d %d", width, height);
 
     int **LoadedMap = malloc(width * sizeof(int));
     if (LoadedMap == NULL)
@@ -81,9 +143,7 @@ void LibererMap(Map *map, Sprites *sprites)
         for (int j = 0; j < height; j++)
         {
             fscanf(file, "%d", &LoadedMap[i][j]);
-            printf("%d",LoadedMap[i][j]);
+            SDL_Log("%d", LoadedMap[i][j]);
         }
     }
 }
-
-

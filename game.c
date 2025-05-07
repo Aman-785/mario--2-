@@ -3,8 +3,17 @@
 #include "charactere.h"
 #include "event.h"
 
+
+void texture(Sprites sprites[], SDL_Renderer *renderer);
+
+void lire(Map *map);
+
 int jouer(SDL_Renderer *renderer)
 {
+    Map map = {0};
+    Sprites sprites[NbSprites] = {0};
+    texture(sprites, renderer);
+    lire(&map);
 
     // charger image et personnage.
 
@@ -21,6 +30,7 @@ int jouer(SDL_Renderer *renderer)
     // a vous de compléter, au fur et à mesure, les deux fonctions en dessous pour bien faire le nettoyage.
     // LibererMap(map, sprites);
     // freePersonnage(mario, goomba, nbGoomba);
+    LibererMap(&map, sprites);
 
     return continuer;
 }
