@@ -11,8 +11,8 @@ int init(SDL_Window **window, SDL_Renderer **renderer, int w, int h);
 
 void image1(SDL_Renderer *renderer) 
 {
-	SDL_Rect rect2 = {0, 0, 600, 600};
-	SDL_Rect rect1 = {0, 0, 600, 600};
+	SDL_Rect rect2 = {0, 0, 900, 900};
+	SDL_Rect rect1 = {0, 0, 900, 900};
 
 	SDL_RenderClear(renderer);
 	SDL_Texture *texture = loadImage("img/menu.jpg", renderer);
@@ -22,11 +22,11 @@ void image1(SDL_Renderer *renderer)
    
 void image2(SDL_Renderer *renderer)
 {
-	SDL_Rect rect2 = {0, 0, 600, 600};
-	SDL_Rect rect1 = {0, 0, 600, 600};
+	SDL_Rect rect2 = {0, 0, 900, 900};
+	SDL_Rect rect1 = {0, 0, 900, 900};
 
 	SDL_RenderClear(renderer);
-	SDL_Texture *texture = loadImage("img/credit.jpg", renderer);
+	SDL_Texture *texture = loadImage("img/credit.png", renderer);
 	SDL_RenderCopy(renderer, texture, &rect1, &rect2);
 	SDL_RenderPresent(renderer);
 }
