@@ -25,8 +25,8 @@ Personnage* creerMario(SDL_Renderer* renderer) {
     mario->image[3] = loadImage("img/Mario4.png", renderer); 
     mario->image[4] = loadImage("img/Mario5.png", renderer); 
     mario->image[5] = loadImage("img/Mario6.png", renderer);
-    mario->position.x = 50;
-    mario->position.y = 450;
+    mario->position.x = 30;
+    mario->position.y =800;
     mario->position.w = WIDTH_MARIO;
     mario->position.h = HEIGHT_MARIO;
 
@@ -158,8 +158,8 @@ void deplacerMario(Personnage* mario) {
 
 void gererSaut(Personnage* mario) {
   if (!mario || mario->jump == 0) return;
-  const int hauteurMax = 45;
-  const int vitesseSaut = 5;
+  const int hauteurMax = 25;
+  const int vitesseSaut = 6;
 
   static int positionInitialeY = 0;
 
