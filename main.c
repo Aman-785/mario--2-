@@ -34,7 +34,7 @@ void image2(SDL_Renderer *renderer)
 int main(int argc, char *argv[])
 {    
 	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window *window = SDL_CreateWindow("Mario", 700, 500, 600, 600, SDL_WINDOW_SHOWN);
+	SDL_Window *window = SDL_CreateWindow("Mario", 700, 500, 900, 900, SDL_WINDOW_SHOWN);
 
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	image1(renderer);
