@@ -8,7 +8,7 @@ et la map.
     
     #include <SDL2/SDL.h>
 
-    #define NbSprites 10 // À modifier si on ajouter des sprites
+    #define NbSprites 11 // À modifier si on ajouter des sprites
     #define Size_Sprite 40 // A modifier si on change taille sprite
     #define LARGEUR_FENETRE 1200 //taille de la fenetre
     #define HAUTEUR_FENETRE 1200 //taille de la fenetre
@@ -27,11 +27,9 @@ et la map.
         SDL_Texture* sprite; //contient la texture
         int traverser; //signifie si on peut traverser ou non le bloc (0 = oui, 1 = non)
     };
-
-    SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer);
+    void lire(Map* map);
+    void afficherMap(SDL_Renderer *renderer, Map *map, Sprites *sprites);
+    SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer); 
     void LibererMap(Map* map, Sprites* sprites);
-
-
-    
 
 #endif

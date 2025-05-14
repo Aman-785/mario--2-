@@ -38,7 +38,8 @@ int jouer(SDL_Renderer *renderer)
                     break;
             }
         }
-    
+        lire(&map);
+        afficherMap(renderer, &map, sprites);
         deplacerMario(mario); 
         gererSaut(mario);     
         afficherMario(renderer, mario);
@@ -48,8 +49,9 @@ int jouer(SDL_Renderer *renderer)
     }
 
     // a vous de compléter, au fur et à mesure, les deux fonctions en dessous pour bien faire le nettoyage.
-    LibererMap(&map, sprites);
+ 
+    
     freePersonnage(mario, NULL, 0);
-
+    LibererMap(&map, sprites);
     return continuer;
 }//5

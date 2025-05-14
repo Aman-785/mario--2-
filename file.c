@@ -38,28 +38,28 @@ SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer)
 
 void LibererMap(Map *map, Sprites *sprites)
 {
-  
 
-for (int i = 0; i < NbSprites; i++) {
-    if (sprites[i].sprite != NULL) {
-        SDL_DestroyTexture(sprites[i].sprite);
-        sprites[i].sprite = NULL; 
-    }
-}
-
-
-if (map->LoadedMap != NULL) {
-    for (int i = 0; i < map->height; i++) {
-        if (map->LoadedMap[i] != NULL) {
-            free(map->LoadedMap[i]);
+    for (int i = 0; i < NbSprites; i++)
+    {
+        if (sprites[i].sprite != NULL)
+        {
+            SDL_DestroyTexture(sprites[i].sprite);
+            sprites[i].sprite = NULL;
         }
     }
-    free(map->LoadedMap);
-    map->LoadedMap = NULL;
-}
-    
 
-
+    if (map->LoadedMap != NULL)
+    {
+        for (int i = 0; i < map->height; i++)
+        {
+            if (map->LoadedMap[i] != NULL)
+            {
+                free(map->LoadedMap[i]);
+            }
+        }
+        free(map->LoadedMap);
+        map->LoadedMap = NULL;
+    }
 }
 
 void texture(Sprites *sprites, SDL_Renderer *renderer)
@@ -68,7 +68,7 @@ void texture(Sprites *sprites, SDL_Renderer *renderer)
     SDL_Texture *texture[11];
 
     texture[0] = loadImage("img/sky.png", renderer);
-    texture[1] = loadImage("img/solpng", renderer);
+    texture[1] = loadImage("img/sol.png", renderer);
     texture[2] = loadImage("img/block.png", renderer);
     texture[3] = loadImage("img/boite.png", renderer);
     texture[4] = loadImage("img/tuyau1.png", renderer);
@@ -96,13 +96,35 @@ void texture(Sprites *sprites, SDL_Renderer *renderer)
     sprites[9].traverser = 0;
     sprites[10].traverser = 1;
 }
+void afficherMap(SDL_Renderer *renderer, Map *map, Sprites *sprites)
+{
+    if (!map || !map->LoadedMap) {
+        printf("Erreur: map ou LoadedMap NULL\n");
+        return;
+    }
+    for (int j = 0; j < map->height; j++) {
+        if (!map->LoadedMap[j]) {
+            printf("Erreur: LoadedMap[%d] est NULL\n", j);
+            continue;
+        }
+        for (int i = 0; i < map->width; i++) {
+            int id = map->LoadedMap[j][i];
+            if (id < 0 || id >= NbSprites) continue;
+            if (!sprites[id].sprite) {
+                printf("Sprite %d non chargé\n", id);
+                continue;
+            }
+            SDL_Rect dest = { i * Size_Sprite, j * Size_Sprite, Size_Sprite, Size_Sprite };
+            SDL_RenderCopy(renderer, sprites[id].sprite, NULL, &dest);
+        }
+    }
+}
 
 void lire(Map *map)
 {
-
     int width, height;
     char niv0[20];
-    FILE *file = fopen("niveau0.lvl", "r");
+    FILE *file = fopen("level/niveau0.lvl", "r");
     if (file == NULL)
     {
         perror("erreur fichier");
@@ -114,7 +136,7 @@ void lire(Map *map)
     fscanf(file, "%d %d", &width, &height);
     SDL_Log("%d %d", width, height);
 
-    int **LoadedMap = malloc(width * sizeof(int));
+    int **LoadedMap = malloc(height * sizeof(int*)); 
     if (LoadedMap == NULL)
     {
         perror("erreur memoire");
@@ -122,28 +144,33 @@ void lire(Map *map)
         exit(1);
     }
 
-    for (int i = 0; i < width; i++)
+    for (int j = 0; j < height; j++)
     {
-        LoadedMap[i] = malloc(height * sizeof(int));
-        if (LoadedMap[i] == NULL)
+        LoadedMap[j] = malloc(width * sizeof(int));
+        if (LoadedMap[j] == NULL)
         {
             perror("erreur memoire 2");
-
-            for (int j = 0; j < i; j++)
+            for (int k = 0; k < j; k++)
             {
-                free(LoadedMap[j]);
+                free(LoadedMap[k]);
             }
             free(LoadedMap);
             fclose(file);
             exit(1);
         }
     }
-    for (int i = 0; i < width; i++)
+    for (int j = 0; j < height; j++)
     {
-        for (int j = 0; j < height; j++)
+        for (int i = 0; i < width; i++)
         {
-            fscanf(file, "%d", &LoadedMap[i][j]);
-            SDL_Log("%d", LoadedMap[i][j]);
+            fscanf(file, "%d", &LoadedMap[j][i]);
+            SDL_Log("%d", LoadedMap[j][i]);
         }
     }
+
+    map->LoadedMap = LoadedMap;
+    map->width = width;
+    map->height = height;
+
+    fclose(file);
 }
