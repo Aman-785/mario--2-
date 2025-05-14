@@ -99,20 +99,18 @@ void texture(Sprites *sprites, SDL_Renderer *renderer)
 void afficherMap(SDL_Renderer *renderer, Map *map, Sprites *sprites)
 {
     if (!map || !map->LoadedMap) {
-        printf("Erreur: map ou LoadedMap NULL\n");
         return;
     }
     for (int j = 0; j < map->height; j++) {
         if (!map->LoadedMap[j]) {
-            printf("Erreur: LoadedMap[%d] est NULL\n", j);
+
             continue;
         }
         for (int i = 0; i < map->width; i++) {
             int id = map->LoadedMap[j][i];
             if (id < 0 || id >= NbSprites) continue;
             if (!sprites[id].sprite) {
-                printf("Sprite %d non chargé\n", id);
-                continue;
+                        continue;
             }
             SDL_Rect dest = { i * Size_Sprite, j * Size_Sprite, Size_Sprite, Size_Sprite };
             SDL_RenderCopy(renderer, sprites[id].sprite, NULL, &dest);
