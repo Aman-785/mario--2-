@@ -121,15 +121,15 @@ void afficherMap(SDL_Renderer *renderer, Map *map, Sprites *sprites)
 void lire(Map *map)
 {
     int width, height;
-    char niv0[20];
-    FILE *file = fopen("level/niveau0.lvl", "r");
+    char niv1[20];
+    FILE *file = fopen("level/niveau1.lvl", "r");
     if (file == NULL)
     {
         perror("erreur fichier");
         exit(1);
     }
 
-    fgets(niv0, sizeof(niv0), file);
+    fgets(niv1, sizeof(niv1), file);
 
     fscanf(file, "%d %d", &width, &height);
     SDL_Log("%d %d", width, height);

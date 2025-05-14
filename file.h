@@ -14,7 +14,7 @@ et la map.
     #define HAUTEUR_FENETRE 1200 //taille de la fenetre
 
     typedef struct Map Map;
-    struct Map+
+    struct Map
     {
         int width, height;
         int** LoadedMap; //contient les chiffres du niveau (charger depuis le fichier)
